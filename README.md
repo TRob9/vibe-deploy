@@ -163,14 +163,19 @@ Now whenever you push to `main` or `master` branch, your site will auto-deploy!
 ```
 vibe-deploy/
 ├── .env                    # Environment variables (DO NOT COMMIT!)
+├── .env.example            # Template for .env configuration
 ├── .gitignore              # Protects secrets
 ├── docker-compose.yml      # Service definitions (Caddy + Webhook)
 ├── Caddyfile              # Caddy routing configuration
 ├── sites.yaml             # Site definitions for routing
-├── start.sh               # Universal startup script
-├── vibe-deploy-startup.sh # Advanced startup with site deployment
+├── start.sh               # Quick startup script (core services only)
+├── start-full.sh          # Full startup with site deployment
 ├── generate-caddy-config.sh # Regenerate Caddy config from sites.yaml
 ├── archive-site.sh        # Archive old sites
+├── windows-shortcuts/     # Windows .bat shortcuts for WSL users
+│   ├── Start-VibeDeploy.bat
+│   ├── Start-VibeDeploy-Full.bat
+│   └── Archive-Site.bat
 ├── webhook-service/       # Go webhook receiver
 │   ├── main.go
 │   ├── Dockerfile
@@ -194,10 +199,19 @@ VibeDeploy auto-detects your app type and deploys accordingly:
 
 ### Starting the System
 
+**Quick Start (core services only):**
 ```bash
 cd ~/Projects/vibe-deploy
 ./start.sh
 ```
+
+**Full Start (deploy all sites from deployments/ folder):**
+```bash
+cd ~/Projects/vibe-deploy
+./start-full.sh
+```
+
+Use the quick start for daily use, and the full start after rebooting or when you need to redeploy all sites.
 
 ### Stopping the System
 
@@ -286,6 +300,24 @@ docker restart your-site
 - Windows files are accessible at `/mnt/c/Users/...`
 - Your WSL home directory is separate from Windows home
 - Cloudflare Tunnel runs inside WSL2
+
+**Windows Desktop Shortcuts:**
+
+For convenience, you can create Windows shortcuts to control VibeDeploy:
+
+```cmd
+# Copy the .bat files from the repo to your Desktop
+# (Do this in PowerShell or File Explorer)
+
+# From File Explorer:
+# Navigate to: \\wsl$\Ubuntu\home\YOUR_USERNAME\Projects\vibe-deploy\windows-shortcuts\
+# Copy the .bat files to your Desktop
+
+# Then double-click them from Windows to:
+# - Start-VibeDeploy.bat: Quick start (just core services)
+# - Start-VibeDeploy-Full.bat: Start + deploy all sites from deployments/
+# - Archive-Site.bat: Archive a deployed site interactively
+```
 
 ### Linux (Native)
 
