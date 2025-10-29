@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  caddy:
+    image: caddy:2.7-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    networks:
+      - web
+    env_file:
+      - .env
+    command: caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+
+  webhook-service:
+    build: ./webhook-service
+    container_name: vibe-deploy-webhook
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./deployments:/deployments
+      - ./sites.yaml:/app/sites.yaml
+      - ./Caddyfile:/app/Caddyfile
+      - ./.env:/.env:ro
+    networks:
+      - web
+    env_file:
+      - .env
+
+networks:
+  web:
+    external: true
+    name: vibe-deploy_web
+
+volumes:
+  caddy_data:
+  caddy_config:
+  caddy_logs:

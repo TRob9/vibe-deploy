@@ -1,0 +1,75 @@
+# Environment variables (contains secrets!)
+.env
+
+# Cloudflare tunnel credentials
+*.cloudflared/
+cloudflared.deb
+
+# Deployments (user repos)
+deployments/
+!deployments/.gitkeep
+
+# Docker volumes
+caddy_data/
+caddy_config/
+caddy_logs/
+
+# Logs
+*.log
+*.err
+*.out
+/tmp/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.nfs*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Backup files
+*.bak
+*.backup
+*.old

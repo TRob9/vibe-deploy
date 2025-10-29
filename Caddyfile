@@ -1,0 +1,43 @@
+# Auto-generated Caddyfile for VibeDeploy
+# DO NOT EDIT MANUALLY - Edit sites.yaml and regenerate
+
+{
+    # Global options
+    admin off  # Disable admin API for security
+    auto_https off  # Cloudflare Tunnel handles HTTPS
+    log {
+        output file /var/log/caddy/access.log
+        format json
+    }
+}
+
+
+# Wordle-six.tomtom.fyi
+http://wordle-six.tomtom.fyi, http://www.wordle-six.tomtom.fyi {
+    reverse_proxy wordle-six:80
+}
+
+# Ascii-camera.tomtom.fyi
+http://ascii-camera.tomtom.fyi, http://www.ascii-camera.tomtom.fyi {
+    reverse_proxy ascii-camera:80
+}
+
+# Pokemon-test.tomtom.fyi
+http://pokemon-test.tomtom.fyi, http://www.pokemon-test.tomtom.fyi {
+    reverse_proxy pokemon-test:80
+}
+
+# Deploy.tomtom.fyi
+http://deploy.tomtom.fyi, http://www.deploy.tomtom.fyi {
+    reverse_proxy vibe-deploy-webhook:8080
+}
+
+# Close-enough.tomtom.fyi
+http://close-enough.tomtom.fyi, http://www.close-enough.tomtom.fyi {
+    reverse_proxy close-enough:80
+}
+
+# Test-vibe-site.tomtom.fyi
+http://test-vibe-site.tomtom.fyi, http://www.test-vibe-site.tomtom.fyi {
+    reverse_proxy test-vibe-site:80
+}

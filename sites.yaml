@@ -1,0 +1,37 @@
+# VibeDeploy Sites Configuration
+# Simple, explicit routing configuration
+# Format: subdomain: container_name:port
+
+sites:
+  wordle-six.tomtom.fyi:
+    container: wordle-six
+    port: 80
+    type: static
+
+  ascii-camera.tomtom.fyi:
+    container: ascii-camera
+    port: 80
+    type: static
+
+  pokemon-test.tomtom.fyi:
+    container: pokemon-test
+    port: 80
+    type: static
+
+  deploy.tomtom.fyi:
+    container: vibe-deploy-webhook
+    port: 8080
+    type: service
+
+  close-enough.tomtom.fyi:
+    container: close-enough
+    port: 80
+    type: static
+
+  test-vibe-site.tomtom.fyi:
+    container: test-vibe-site
+    port: 80
+    type: static
+
+# WWW aliases - automatically redirect www.* to non-www
+auto_www_redirect: true
